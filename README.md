@@ -18,7 +18,7 @@ Inspired by the OpenClaw deployment pattern, rewritten around Hermes's Python st
 ## Quickstart
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/vps-hermes-management/main/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/install.sh | \
   bash -s --
 ```
 
@@ -48,7 +48,7 @@ flag to add a 4th service (`hermes-rag`) that ingests local files and exposes an
 MCP `rag_search` tool the agent calls during chat:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/vps-hermes-management/main/install.sh | \
+curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/install.sh | \
   bash -s -- --with-rag
 ```
 
@@ -271,7 +271,7 @@ curl -s -H "Authorization: Bearer $MGMT_KEY" http://<VPS-IP>:9997/api/system
 ```bash
 # Bootstrap the upgrade endpoint itself the first time (mgmt-api was installed
 # before /api/upgrade-mgmt existed). All subsequent upgrades can use the API.
-ssh root@<VPS> 'curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/vps-hermes-management/main/scripts/upgrade-mgmt.sh | bash'
+ssh root@<VPS> 'curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/scripts/upgrade-mgmt.sh | bash'
 
 # Once /api/upgrade-mgmt is live, upgrade in place via API:
 curl -s -X POST -H "Authorization: Bearer $MGMT_KEY" \
