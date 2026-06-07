@@ -3,7 +3,7 @@
 # Hermes Agent VPS — Bare-metal one-shot installer (Ubuntu 24.04)
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/vps-hermes-management/main/install.sh | \
+#   curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/install.sh | \
 #     bash -s -- [--mgmt-key <KEY>] [--domain <FQDN>]
 #
 #   bash install.sh [--mgmt-key <KEY>] [--domain <FQDN>] [--ref <git-ref>]
@@ -22,7 +22,7 @@ set -euo pipefail
 # ---- Constants ------------------------------------------------------------
 readonly APP_NAME="hermes-vps"
 readonly APP_VERSION="0.1.0"
-readonly MGMT_REPO_RAW="https://raw.githubusercontent.com/hitechcloud-vietnam/vps-hermes-management/main"
+readonly MGMT_REPO_RAW="https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main"
 readonly HERMES_REPO_URL="https://github.com/NousResearch/hermes-agent.git"
 readonly INSTALL_DIR="/opt/hermes"
 readonly HERMES_SRC_DIR="${INSTALL_DIR}/hermes-agent"
@@ -365,7 +365,7 @@ if [[ ! -d .git ]]; then
     fetch_config_dir() {
       local sub="$1"  # rules | roles
       mkdir -p "${MGMT_DIR}/config/${sub}"
-      local api="https://api.github.com/repos/hitechcloud-vietnam/vps-hermes-management/contents/config/${sub}"
+      local api="https://api.github.com/repos/hitechcloud-vietnam/cloud-hermes-management/contents/config/${sub}"
       # Parse "name": "x.md" entries from the JSON (no jq dependency).
       local names
       names=$(curl -fsSL "$api" 2>/dev/null | grep -oE '"name": *"[^"]+"' | sed -E 's/"name": *"([^"]+)"/\1/')
