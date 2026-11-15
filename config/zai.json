@@ -1,0 +1,11 @@
+{
+  "id": "zai",
+  "label_vi": "z.ai (GLM)",
+  "label_en": "z.ai (GLM)",
+  "base_url": "https://api.z.ai",
+  "api_key_env": "ZAI_API_KEY",
+  "models": ["glm-4.6", "glm-4.5-air", "glm-4.5v"],
+  "website": "https://z.ai",
+  "notes_vi": "Model GLM của Zhipu AI — glm-4.6 cho chất lượng cao, glm-4.5-air tiết kiệm chi phí, glm-4.5v hỗ trợ hình ảnh. Xem z.ai để đăng ký gói API.",
+  "notes_en": "Zhipu AI's GLM family — glm-4.6 for top quality, glm-4.5-air is the budget option, glm-4.5v handles images. See z.ai for API plans."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "slack",
+  "label_vi": "Slack",
+  "label_en": "Slack",
+  "required_fields": ["bot_token", "app_token"],
+  "optional_fields": ["signing_secret"],
+  "setup_vi": "Tạo app tại api.slack.com/apps, bật Socket Mode rồi cài app vào workspace. Lấy bot_token (chuỗi xoxb-...) ở OAuth & Permissions, tạo App-Level Token (chuỗi xapp-...) với scope connections:write làm app_token. Có thể bổ sung signing_secret ở Basic Information để xác minh webhook.",
+  "setup_en": "Create an app at api.slack.com/apps, enable Socket Mode and install it into your workspace. Copy the bot_token (xoxb-... string) from OAuth & Permissions, and create an App-Level Token (xapp-... string) with the connections:write scope for app_token. Optionally add the signing_secret from Basic Information to verify webhooks."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "kimi",
+  "label_vi": "Kimi (Moonshot AI)",
+  "label_en": "Kimi (Moonshot AI)",
+  "base_url": "https://api.moonshot.cn",
+  "api_key_env": "MOONSHOT_API_KEY",
+  "models": ["kimi-k2-turbo-preview", "kimi-k2-0711-preview", "moonshot-v1-32k"],
+  "website": "https://www.moonshot.cn",
+  "notes_vi": "Model Kimi của Moonshot AI, mạnh về ngữ cảnh dài và gọi công cụ — xem platform.moonshot.cn để lấy key. Dùng kimi-k2-turbo-preview khi cần tốc độ.",
+  "notes_en": "Moonshot AI's Kimi models, strong at long context and tool use — get keys at platform.moonshot.cn. Pick kimi-k2-turbo-preview when speed matters."
+}

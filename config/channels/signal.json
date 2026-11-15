@@ -1,0 +1,9 @@
+{
+  "id": "signal",
+  "label_vi": "Signal",
+  "label_en": "Signal",
+  "required_fields": ["phone_number"],
+  "optional_fields": ["signal_cli_rest_url"],
+  "setup_vi": "Signal dùng qua signal-cli với REST API (ví dụ image bbernhard/signal-cli-rest-api). Đăng ký số điện thoại riêng cho bot, xác minh bằng mã OTP gửi tới số đó rồi khai báo phone_number gồm mã quốc gia (ví dụ +84901234567). Nếu REST API không chạy ở địa chỉ mặc định, khai báo thêm signal_cli_rest_url.",
+  "setup_en": "Signal runs via signal-cli behind a REST API (e.g. the bbernhard/signal-cli-rest-api image). Register a dedicated phone number for the bot, verify it with the OTP sent to that number, then set phone_number including the country code (e.g. +84901234567). If your REST API is not on the default address, also fill in signal_cli_rest_url."
+}

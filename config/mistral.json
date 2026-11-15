@@ -1,0 +1,11 @@
+{
+  "id": "mistral",
+  "label_vi": "Mistral AI",
+  "label_en": "Mistral AI",
+  "base_url": "https://api.mistral.ai",
+  "api_key_env": "MISTRAL_API_KEY",
+  "models": ["mistral-large-latest", "mistral-small-latest", "codestral-latest"],
+  "website": "https://mistral.ai",
+  "notes_vi": "Nhà cung cấp châu Âu, xem console.mistral.ai để lấy key và bảng giá. mistral-large-latest cho chất lượng cao; codestral-latest chuyên về code.",
+  "notes_en": "European provider, see console.mistral.ai for keys and pricing. mistral-large-latest for top quality; codestral-latest specialises in code."
+}

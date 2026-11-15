@@ -1,0 +1,11 @@
+{
+  "id": "mimo",
+  "label_vi": "MiMo (Xiaomi)",
+  "label_en": "MiMo (Xiaomi)",
+  "base_url": "https://api.xiaomimimo.com",
+  "api_key_env": "MIMO_API_KEY",
+  "models": ["mimo-7b-rl", "mimo-vl-7b-rl", "mimo-7b-sft"],
+  "website": "https://www.xiaomimimo.com",
+  "notes_vi": "Model MiMo của Xiaomi — mimo-7b-rl cho hội thoại, mimo-vl-7b-rl hỗ trợ đầu vào hình ảnh. Xem tài liệu tại xiaomimimo.com để lấy API key.",
+  "notes_en": "Xiaomi's MiMo models — mimo-7b-rl for chat, mimo-vl-7b-rl accepts image inputs. See xiaomimimo.com for docs and API keys."
+}

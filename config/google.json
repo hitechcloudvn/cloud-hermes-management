@@ -1,0 +1,11 @@
+{
+  "id": "google",
+  "label_vi": "Google (Gemini)",
+  "label_en": "Google (Gemini)",
+  "base_url": "https://generativelanguage.googleapis.com",
+  "api_key_env": "GOOGLE_API_KEY",
+  "models": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
+  "website": "https://ai.google.dev",
+  "notes_vi": "Lấy API key tại aistudio.google.com (biến GOOGLE_API_KEY; GEMINI_API_KEY cũng được chấp nhận). gemini-2.5-flash phù hợp chi phí thấp, gemini-2.5-pro cho tác vụ khó.",
+  "notes_en": "Get an API key at aistudio.google.com (env var GOOGLE_API_KEY; GEMINI_API_KEY is also accepted). gemini-2.5-flash is the low-cost option, gemini-2.5-pro for hard tasks."
+}

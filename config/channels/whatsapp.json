@@ -1,0 +1,9 @@
+{
+  "id": "whatsapp",
+  "label_vi": "WhatsApp (Meta Cloud API)",
+  "label_en": "WhatsApp (Meta Cloud API)",
+  "required_fields": ["phone_number_id", "access_token"],
+  "optional_fields": ["webhook_verify_token"],
+  "setup_vi": "Tạo app tại developers.facebook.com với sản phẩm WhatsApp, vào WhatsApp → Configuration để lấy phone_number_id. Tạo System User trong Business Manager và cấp access_token vĩnh viễn có quyền whatsapp_business_messaging. Khi cấu hình webhook từ Meta, dùng webhook_verify_token do bạn tự đặt để xác minh.",
+  "setup_en": "Create an app with the WhatsApp product at developers.facebook.com, then open WhatsApp → Configuration to get the phone_number_id. Create a System User in Business Manager and issue a permanent access_token with the whatsapp_business_messaging permission. When Meta asks to configure the webhook, use the webhook_verify_token you set here to verify it."
+}

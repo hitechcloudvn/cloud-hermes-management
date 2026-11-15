@@ -1,0 +1,11 @@
+{
+  "id": "groq",
+  "label_vi": "Groq",
+  "label_en": "Groq",
+  "base_url": "https://api.groq.com",
+  "api_key_env": "GROQ_API_KEY",
+  "models": ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "gemma2-9b-it"],
+  "website": "https://groq.com",
+  "notes_vi": "Chạy trên LPU nên độ trễ cực thấp, có gói miễn phí — xem console.groq.com. Phù hợp chatbot cần phản hồi tức thì với model mã nguồn mở.",
+  "notes_en": "Runs on LPUs for ultra-low latency with a free tier — see console.groq.com. Great for chatbots that need instant replies on open models."
+}

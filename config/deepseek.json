@@ -1,0 +1,11 @@
+{
+  "id": "deepseek",
+  "label_vi": "DeepSeek",
+  "label_en": "DeepSeek",
+  "base_url": "https://api.deepseek.com",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "models": ["deepseek-v4-flash", "deepseek-v4", "deepseek-chat"],
+  "website": "https://www.deepseek.com",
+  "notes_vi": "Rẻ và mạnh, xem platform.deepseek.com. deepseek-v4-flash rất nhanh, chi phí thấp (dùng cho smoke test); deepseek-v4 cho chất lượng cao nhất; deepseek-chat là model đa dụng mặc định.",
+  "notes_en": "Cheap and capable, see platform.deepseek.com. deepseek-v4-flash is very fast and cheap (used by our smoke test); deepseek-v4 for top quality; deepseek-chat is the general-purpose default."
+}

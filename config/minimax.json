@@ -1,0 +1,11 @@
+{
+  "id": "minimax",
+  "label_vi": "MiniMax",
+  "label_en": "MiniMax",
+  "base_url": "https://api.minimax.chat",
+  "api_key_env": "MINIMAX_API_KEY",
+  "models": ["MiniMax-M2", "MiniMax-M1", "MiniMax-Text-01"],
+  "website": "https://www.minimax.io",
+  "notes_vi": "MiniMax-M2 là model chủ lực (agent/tool-calling tốt); MiniMax-Text-01 mạnh về ngữ cảnh rất dài. Xem bảng giá tại minimax.io.",
+  "notes_en": "MiniMax-M2 is the flagship (strong agent/tool-calling); MiniMax-Text-01 excels at very long contexts. See minimax.io for pricing."
+}

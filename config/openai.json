@@ -1,0 +1,11 @@
+{
+  "id": "openai",
+  "label_vi": "OpenAI",
+  "label_en": "OpenAI",
+  "base_url": "https://api.openai.com",
+  "api_key_env": "OPENAI_API_KEY",
+  "models": ["gpt-5", "gpt-5-mini", "gpt-5-nano"],
+  "website": "https://openai.com",
+  "notes_vi": "Xem bảng giá tại openai.com/pricing. gpt-5 cho chất lượng cao nhất, gpt-5-mini và gpt-5-nano tiết kiệm chi phí cho tác vụ đơn giản.",
+  "notes_en": "See openai.com/pricing for pricing. gpt-5 gives the highest quality; gpt-5-mini and gpt-5-nano are cost-efficient for simpler tasks."
+}

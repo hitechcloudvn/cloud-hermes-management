@@ -1,0 +1,9 @@
+{
+  "id": "telegram",
+  "label_vi": "Telegram",
+  "label_en": "Telegram",
+  "required_fields": ["bot_token", "chat_id"],
+  "optional_fields": ["parse_mode"],
+  "setup_vi": "Nhắn @BotFather trên Telegram, gọi /newbot và làm theo hướng dẫn để lấy bot_token. Sau đó nhắn bất kỳ tin nào cho bot rồi gọi https://api.telegram.org/bot<token>/getUpdates để lấy chat_id. Dán cả hai giá trị vào đây và lưu cấu hình.",
+  "setup_en": "Message @BotFather on Telegram, run /newbot and follow the prompts to get the bot_token. Then send any message to your bot and call https://api.telegram.org/bot<token>/getUpdates to read the chat_id. Paste both values here and save the config."
+}

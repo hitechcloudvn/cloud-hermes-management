@@ -1,0 +1,11 @@
+{
+  "id": "xai",
+  "label_vi": "xAI (Grok)",
+  "label_en": "xAI (Grok)",
+  "base_url": "https://api.x.ai",
+  "api_key_env": "XAI_API_KEY",
+  "models": ["grok-4", "grok-3", "grok-3-mini"],
+  "website": "https://x.ai",
+  "notes_vi": "Xem bảng giá tại x.ai. grok-4 là model mạnh nhất của xAI; grok-3-mini phù hợp tác vụ nhanh, chi phí thấp.",
+  "notes_en": "See x.ai for pricing. grok-4 is xAI's most capable model; grok-3-mini suits fast, low-cost tasks."
+}

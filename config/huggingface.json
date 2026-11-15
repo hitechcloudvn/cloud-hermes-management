@@ -1,0 +1,11 @@
+{
+  "id": "huggingface",
+  "label_vi": "Hugging Face",
+  "label_en": "Hugging Face",
+  "base_url": "https://api-inference.huggingface.co",
+  "api_key_env": "HF_TOKEN",
+  "models": ["meta-llama/Llama-3.3-70B-Instruct", "Qwen/Qwen2.5-72B-Instruct", "deepseek-ai/DeepSeek-V3"],
+  "website": "https://huggingface.co",
+  "notes_vi": "Inference Providers của Hugging Face — tạo token tại huggingface.co/settings/tokens và khai báo dưới biến HF_TOKEN. Tên model theo định dạng tổ chức/tên-model trên Hub.",
+  "notes_en": "Hugging Face Inference Providers — create a token at huggingface.co/settings/tokens and set it as HF_TOKEN. Model IDs follow the org/model-name Hub format."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "discord",
+  "label_vi": "Discord",
+  "label_en": "Discord",
+  "required_fields": ["webhook_url"],
+  "optional_fields": ["bot_token"],
+  "setup_vi": "Vào Server Settings → Integrations → Webhooks, tạo webhook mới và sao chép Web URL để dùng làm webhook_url (gửi tin nhắn ra kênh rất đơn giản). Nếu muốn bot nhận và trả lời tin nhắn, tạo ứng dụng tại discord.com/developers/applications, cài bot vào server và bổ sung bot_token.",
+  "setup_en": "Go to Server Settings → Integrations → Webhooks, create a webhook and copy its Web URL as webhook_url (simplest way to post into a channel). If the bot must receive and answer messages, create an application at discord.com/developers/applications, add the bot to your server and fill in bot_token as well."
+}

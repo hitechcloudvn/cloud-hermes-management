@@ -1,0 +1,11 @@
+{
+  "id": "nous-portal",
+  "label_vi": "Nous Portal (Hermes)",
+  "label_en": "Nous Portal (Hermes)",
+  "base_url": "https://api.nousresearch.com",
+  "api_key_env": "NOUS_API_KEY",
+  "models": ["Hermes-4-405B", "Hermes-4-70B", "Hermes-4-14B"],
+  "website": "https://nousresearch.com",
+  "notes_vi": "Cổng API chính thức của Nous Research, host các model Hermes cùng họ với Hermes Agent. Hermes-4-70B là lựa chọn cân bằng; Hermes-4-14B nhanh và rẻ hơn.",
+  "notes_en": "Nous Research's official API portal, hosting the Hermes model family that powers Hermes Agent. Hermes-4-70B is the balanced pick; Hermes-4-14B is faster and cheaper."
+}

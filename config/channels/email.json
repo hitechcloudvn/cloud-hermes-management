@@ -1,0 +1,9 @@
+{
+  "id": "email",
+  "label_vi": "Email (SMTP)",
+  "label_en": "Email (SMTP)",
+  "required_fields": ["smtp_host", "smtp_port", "smtp_user", "smtp_password", "from_address"],
+  "optional_fields": ["smtp_use_tls"],
+  "setup_vi": "Dùng tài khoản SMTP của nhà cung cấp (Gmail, Amazon SES, SendGrid, hoặc mail server của công ty). Điền smtp_host và smtp_port (587 cho TLS, 465 cho SSL), smtp_user cùng smtp_password (với Gmail hãy tạo App Password). from_address là địa chỉ người gửi hiển thị, nên cùng domain với smtp_user để tránh bị đánh dấu spam.",
+  "setup_en": "Use an SMTP account from your provider (Gmail, Amazon SES, SendGrid, or your company mail server). Fill in smtp_host and smtp_port (587 for TLS, 465 for SSL), smtp_user and smtp_password (for Gmail, create an App Password). from_address is the visible sender address and should share the smtp_user domain to avoid spam flags."
+}

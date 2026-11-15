@@ -1,0 +1,11 @@
+{
+  "id": "together",
+  "label_vi": "Together AI",
+  "label_en": "Together AI",
+  "base_url": "https://api.together.xyz",
+  "api_key_env": "TOGETHER_API_KEY",
+  "models": ["meta-llama/Llama-3.3-70B-Instruct-Turbo", "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo", "deepseek-ai/DeepSeek-V3"],
+  "website": "https://www.together.ai",
+  "notes_vi": "Hơn 200 model mã nguồn mở theo dạng serverless, xem api.together.ai. Tên model dùng định dạng tổ chức/tên-model (như Hugging Face).",
+  "notes_en": "200+ open models on serverless endpoints, see api.together.ai. Model IDs use the organisation/model-name format (like Hugging Face)."
+}
