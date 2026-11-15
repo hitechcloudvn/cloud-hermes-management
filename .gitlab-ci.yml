@@ -1,6 +1,6 @@
 # GitLab CI — cloud-hermes-management
-# Test trên mọi nhánh/MR; build + release khi push tag v* / Tests on branches & MRs; build+release on v* tags
-# (không build artifact ở máy cá nhân / never build release artifacts locally)
+# Test tren moi nhanh/MR; build + release khi push tag v* / Tests on branches & MRs; build+release on v* tags
+# (khong build artifact o may ca nhan / never build release artifacts locally)
 
 image: python:3.11-slim
 
@@ -9,8 +9,8 @@ stages:
   - build
   - release
 
-# Cổng cho release: test phải xanh trước / release gate — tests must pass first
-# Chạy trên tag luôn để đảm bảo gate / also runs on tag pipelines so the gate covers releases
+# Cong cho release: test phai xanh truoc / release gate — tests must pass first
+# Chay tren tag luon de dam bao gate / also runs on tag pipelines so the gate covers releases
 test:
   stage: test
   rules:
@@ -18,14 +18,14 @@ test:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH
   script:
-    # Dep cho cả hai bộ test / deps for both suites (rag-mcp: fastembed/mcp là lazy import, không cần)
+    # Dep cho ca hai bo test / deps for both suites (rag-mcp: fastembed/mcp la lazy import, khong can)
     - pip install fastapi uvicorn pydantic pydantic-settings bcrypt psutil pyyaml httpx pytest numpy pypdf
     - pip install -e rag-mcp --no-deps
     - pip install -e management-api
-    # Cả hai bộ pytest phải xanh / both pytest suites must pass
+    # Ca hai bo pytest phai xanh / both pytest suites must pass
     - python -m pytest management-api/tests rag-mcp/tests -q
 
-# Build wheel + sdist, chỉ khi có tag v* / build wheels + sdists, only on v* tags
+# Build wheel + sdist, chi khi co tag v* / build wheels + sdists, only on v* tags
 build:
   stage: build
   rules:
@@ -36,9 +36,9 @@ build:
     - python -m build rag-mcp/
     - mkdir -p dist
     - cp management-api/dist/* rag-mcp/dist/* dist/
-    # SHA256SUMS.txt với tên file ngắn / checksums with bare filenames
+    # SHA256SUMS.txt voi ten file ngan / checksums with bare filenames
     - (cd dist && sha256sum *.whl *.tar.gz > SHA256SUMS.txt)
-    # Ghi tên file vào dotenv để job release tạo link chính xác / record artifact filenames for the release job links
+    # Ghi ten file vao dotenv de job release tao link chinh xac / record artifact filenames for the release job links
     - |
       {
         mgmt_whl=$(ls dist/*.whl | grep -v rag | head -n1)
@@ -59,66 +59,30 @@ build:
     reports:
       dotenv: build.env
 
-# Tạo GitLab Release khi có tag v* / create the GitLab Release on v* tags
+# Tao GitLab Release khi co tag v* / create the GitLab Release on v* tags
+# Khong dung keyword `release:` — runner 19.6+ yeu cau glab/release-cli trong
+# image job (python:3.11-slim khong co) va embed mo ta markdown vao shell script
+# (backtick trong mo ta bi thuc thi). Goi Releases API truc tiep qua
+# .ci/create_gitlab_release.py — xem docstring file do.
+# Not using the `release:` keyword — runner 19.6+ needs glab/release-cli inside
+# the job image (python:3.11-slim has neither) and embeds the markdown notes
+# into shell code (backticks get executed). We call the Releases API directly
+# via .ci/create_gitlab_release.py — see that file's docstring.
 release:
   stage: release
   needs:
     - build
   rules:
     - if: $CI_COMMIT_TAG =~ /^v/
-  # Upload lại dist/ để link job-artifact $CI_JOB_ID hoạt động / re-upload dist/ so $CI_JOB_ID artifact links resolve
+  script:
+    - ls -l dist/
+    - python -u .ci/create_gitlab_release.py
+  # Upload lai dist/ de link job-artifact $CI_JOB_ID hoat dong; giu ca khi that
+  # bai de doc release-response.json / re-upload dist/ so $CI_JOB_ID artifact
+  # links resolve; keep even on failure so release-response.json stays readable
   artifacts:
+    when: always
     paths:
       - dist/
+      - release-response.json
     expire_in: 30 days
-  release:
-    tag_name: $CI_COMMIT_TAG
-    name: "$CI_COMMIT_TAG"
-    description: |
-      ## Tiếng Việt
-
-      Bản phát hành đầu tiên của **cloud-hermes-management** — bộ công cụ triển khai Hermes Agent lên VPS bare-metal (Ubuntu 24.04):
-
-      - **Management API** (FastAPI) với 73 endpoint quản trị
-      - **RAG MCP** — dịch vụ truy xuất tri thức cục bộ
-      - **Trình cài đặt bare-metal** (`install.sh` / `bootstrap.sh`)
-      - Wheel/sdist do CI xây dựng, kèm checksum `SHA256SUMS.txt`
-
-      Cài đặt bằng lệnh sau từ tổ chức `hitechcloudvn`:
-
-      ```bash
-      curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | bash
-      ```
-
-      ## English
-
-      First release of **cloud-hermes-management** — bare-metal deployment wrapper for Hermes Agent (Ubuntu 24.04 VPS):
-
-      - **Management API** (FastAPI) with 73 endpoints
-      - **RAG MCP** — local knowledge retrieval service
-      - **Bare-metal installer** (`install.sh` / `bootstrap.sh`)
-      - CI/CD-built wheels/sdists with `SHA256SUMS.txt` checksums
-
-      Install with the following command from the `hitechcloudvn` org:
-
-      ```bash
-      curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | bash
-      ```
-    assets:
-      links:
-        # Tên file lấy từ dotenv của job build / filenames discovered by the build job
-        - name: "hermes_mgmt wheel"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_MGMT_WHL}"
-          link_type: package
-        - name: "hermes_mgmt sdist"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_MGMT_SDIST}"
-          link_type: package
-        - name: "hermes_rag wheel"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_RAG_WHL}"
-          link_type: package
-        - name: "hermes_rag sdist"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_RAG_SDIST}"
-          link_type: package
-        - name: "SHA256SUMS.txt"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/SHA256SUMS.txt"
-          link_type: other
