@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-mgmt"
+version = "0.1.0"
+description = "Hermes VPS Management API (FastAPI) / API quản trị VPS Hermes"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.27",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "bcrypt>=4",
+    "psutil>=5.9",
+    "pyyaml>=6",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["hermes_mgmt*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
