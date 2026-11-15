@@ -10,13 +10,13 @@
 #
 # Usage:
 #   ssh root@<VPS> 'curl -fsSL \
-#     https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/scripts/upgrade-mgmt.sh \
+#     https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/scripts/upgrade-mgmt.sh \
 #     | bash'
 # =============================================================================
 
 set -euo pipefail
 
-readonly REPO_RAW="https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main"
+readonly REPO_RAW="https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main"
 readonly MGMT_DIR="/opt/hermes-mgmt"
 readonly UV_BIN="${MGMT_DIR}/.venv/bin/uv"
 

@@ -1,5 +1,7 @@
 # hermes-rag — Local RAG over MCP for Hermes Agent
 
+[English](README.md) | [Tiếng Việt](README.vi.md)
+
 A small, dependency-light Retrieval-Augmented-Generation service for the
 [hermes-vps](../README.md) stack. It ingests your own documents, embeds them
 locally with [fastembed](https://github.com/qdrant/fastembed) (CPU, no API key),

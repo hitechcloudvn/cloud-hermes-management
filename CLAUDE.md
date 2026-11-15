@@ -4,6 +4,8 @@
 
 Bare-metal Ubuntu 24.04 VPS deployment wrapper for NousResearch Hermes Agent. Three systemd-managed services + Caddy reverse proxy + FastAPI Management API. Net-new Python codebase, not a fork of OpenClaw.
 
+User-facing docs are bilingual: `README.md` (English) / `README.vi.md` (Tiếng Việt).
+
 ## Service graph
 
 ```
@@ -83,7 +85,7 @@ All 3 services are grouped under `hermes.target` for atomic start/stop.
 
 ```bash
 # Full install (from fresh Ubuntu 24.04)
-curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | bash
 
 # Cloud-init bootstrap (reboots VPS, runs install post-reboot)
 curl -fsSL .../bootstrap.sh | bash -s -- --mgmt-key <key>
@@ -173,7 +175,7 @@ rag-mcp/hermes_rag/
 
 ## Test invariants (pytest)
 
-- 80 tests under `management-api/tests/` — must all pass before release
+- 159 tests under `management-api/tests/` (+ 16 under `rag-mcp/tests/`) — must all pass before release
 - No real subprocess calls in tests — everything mocked
 - `fastapi.testclient.TestClient` for HTTP tests
 - Dependency injection for settings override via `app.dependency_overrides[get_settings]`

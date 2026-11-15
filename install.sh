@@ -3,7 +3,7 @@
 # Hermes Agent VPS — Bare-metal one-shot installer (Ubuntu 24.04)
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/install.sh | \
+#   curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | \
 #     bash -s -- [--mgmt-key <KEY>] [--domain <FQDN>]
 #
 #   bash install.sh [--mgmt-key <KEY>] [--domain <FQDN>] [--ref <git-ref>]
@@ -15,6 +15,8 @@
 #   --skip-hermes  Skip Hermes Agent install (useful for mgmt-api-only updates)
 #   --with-rag   Install the local RAG MCP service + register it with Hermes
 #   --skip-zalo  Skip the Zalo personal plugin (installed by default)
+#
+# Full docs: README.md (English) / README.vi.md (Tiếng Việt)
 # =============================================================================
 
 set -euo pipefail
@@ -22,7 +24,7 @@ set -euo pipefail
 # ---- Constants ------------------------------------------------------------
 readonly APP_NAME="hermes-vps"
 readonly APP_VERSION="0.1.0"
-readonly MGMT_REPO_RAW="https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main"
+readonly MGMT_REPO_RAW="https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main"
 readonly HERMES_REPO_URL="https://github.com/NousResearch/hermes-agent.git"
 readonly INSTALL_DIR="/opt/hermes"
 readonly HERMES_SRC_DIR="${INSTALL_DIR}/hermes-agent"
@@ -41,7 +43,7 @@ readonly PYTHON_PIN="3.11"
 
 # Zalo personal plugin (unofficial Zalo Web API via zca-js Node sidecar).
 # Installed by default into the gateway's HERMES_HOME plugins dir; skip with --skip-zalo.
-readonly ZALO_PLUGIN_REPO="https://github.com/hitechcloud-vietnam/hermes-zalo-plugin"
+readonly ZALO_PLUGIN_REPO="https://github.com/hitechcloudvn/hermes-zalo-plugin"
 readonly ZALO_PLUGIN_NAME="zalo-personal"
 
 # ---- Args -----------------------------------------------------------------
@@ -365,7 +367,7 @@ if [[ ! -d .git ]]; then
     fetch_config_dir() {
       local sub="$1"  # rules | roles
       mkdir -p "${MGMT_DIR}/config/${sub}"
-      local api="https://api.github.com/repos/hitechcloud-vietnam/cloud-hermes-management/contents/config/${sub}"
+      local api="https://api.github.com/repos/hitechcloudvn/cloud-hermes-management/contents/config/${sub}"
       # Parse "name": "x.md" entries from the JSON (no jq dependency).
       local names
       names=$(curl -fsSL "$api" 2>/dev/null | grep -oE '"name": *"[^"]+"' | sed -E 's/"name": *"([^"]+)"/\1/')
@@ -650,8 +652,9 @@ fi
 
 # ---- 13. Seed config templates -------------------------------------------
 step "13. Seed provider/channel templates"
-# Provider templates — keep in sync with config/*.json in this repo + with the
-# _PROVIDER_BASE_URLS map in management-api/hermes_mgmt/routes/config_routes.py
+# Provider templates — keep in sync with config/*.json in this repo.
+# base_url/api_key_env/models are read from these templates at runtime by
+# management-api/hermes_mgmt/routes/config_routes.py (single source of truth).
 for tpl in anthropic openai google xai \
            deepseek groq mistral together \
            nous-portal openrouter huggingface \

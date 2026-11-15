@@ -2,8 +2,10 @@
 # =============================================================================
 # hermes-vps Bootstrap — waits for cloud-init, schedules install.sh post-reboot
 #
+# Full docs: README.md (English) / README.vi.md (Tiếng Việt)
+#
 # Usage (from local shell):
-#   ssh root@vps "curl -fsSL https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/bootstrap.sh | \
+#   ssh root@vps "curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/bootstrap.sh | \
 #     bash -s -- [--mgmt-key <KEY>] [--gateway-token <KEY>] [--auth-token <KEY>] [--domain <FQDN>]"
 #
 # Recognized flags (any pre-seeded value lands in /opt/hermes/.env so install.sh
@@ -47,7 +49,7 @@ if [[ "${HERMES_BOOTSTRAP_DETACHED:-0}" != "1" ]]; then
         cp -f "$0" "$self"
     else
         # Re-fetch from the same raw URL we'd otherwise serve install.sh from.
-        curl -fsSL "https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main/bootstrap.sh" \
+        curl -fsSL "https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/bootstrap.sh" \
             -o "$self" || { echo "FATAL: bootstrap self-download failed" >&2; exit 1; }
     fi
     chmod +x "$self"
@@ -58,7 +60,7 @@ if [[ "${HERMES_BOOTSTRAP_DETACHED:-0}" != "1" ]]; then
     exit 0
 fi
 
-readonly REPO_RAW="https://raw.githubusercontent.com/hitechcloud-vietnam/cloud-hermes-management/main"
+readonly REPO_RAW="https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main"
 readonly BOOT_DIR="/opt/hermes"
 readonly INSTALL_SCRIPT="${BOOT_DIR}/hermes-install.sh"
 readonly INSTALL_ARGS="${BOOT_DIR}/hermes-install.args"
