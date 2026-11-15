@@ -2,7 +2,12 @@
 # =============================================================================
 # hermes-vps Bootstrap — waits for cloud-init, schedules install.sh post-reboot
 #
-# Full docs: README.md (English) / README.vi.md (Tiếng Việt)
+# Mục đích (VI): Chờ cloud-init hoàn tất, ghi sẵn token vào /opt/hermes/.env,
+#   lên lịch chạy install.sh sau khi reboot — cài đặt tự động hoàn toàn.
+# Purpose (EN): Wait for cloud-init, pre-seed tokens into /opt/hermes/.env, and
+#   schedule install.sh to run after reboot — fully unattended install.
+#
+# Tài liệu đầy đủ / Full docs: README.md (song ngữ VN/EN / bilingual VN/EN)
 #
 # Usage (from local shell):
 #   ssh root@vps "curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/bootstrap.sh | \

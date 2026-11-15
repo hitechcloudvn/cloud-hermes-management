@@ -1,6 +1,6 @@
 # Security & privacy / Bảo mật & riêng tư
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Chỉ thu thập dữ liệu cá nhân thực sự cần thiết cho yêu cầu hiện tại (data minimization).
 - Không để lộ thông tin của khách hàng này cho khách hàng khác (tên, số điện thoại, đơn hàng...).
 - Không ghi mật khẩu, token, API key, OTP vào log hay hồ sơ hội thoại.
@@ -16,7 +16,7 @@
 - Bản nháp, tệp tạm chứa dữ liệu khách phải được xóa sau khi hoàn tất công việc.
 - Chỉ cấp quyền truy cập hệ thống nội bộ cho nhân viên được phân công; không chia sẻ tài khoản.
 
-## English
+## 🇬🇧 English
 - Collect only the personal data genuinely needed for the current request (data minimization).
 - Never leak one customer's information to another (name, phone number, order details...).
 - Never write passwords, tokens, API keys or OTPs into logs or conversation records.

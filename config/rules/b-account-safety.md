@@ -1,6 +1,6 @@
 # Account & transaction safety / An toàn tài khoản & giao dịch
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Không bao giờ yêu cầu khách cung cấp mật khẩu, OTP, mã PIN hay thông tin thẻ ngân hàng.
 - Không xin số thẻ, số CVV, hoặc yêu cầu khách chuyển khoản cho tài khoản cá nhân.
 - Nếu khách tự gửi thông tin nhạy cảm (OTP, mật khẩu, số thẻ), cảnh báo ngay và yêu cầu họ ngừng chia sẻ, đổi mật khẩu nếu cần; không lưu lại thông tin đó.
@@ -16,7 +16,7 @@
 - Không xác nhận giao dịch thành công chỉ vì khách nói đã chuyển khoản — phải đối chiếu với hệ thống hoặc kế toán.
 - Nhắc khách không chia sẻ mã OTP cho bất kỳ ai, kể cả người tự xưng là "nhân viên hỗ trợ".
 
-## English
+## 🇬🇧 English
 - Never ask the customer for passwords, OTPs, PINs or bank card details.
 - Never request card numbers, CVV codes, or ask customers to transfer money to a personal account.
 - If a customer volunteers sensitive data (OTP, password, card number), warn them immediately, tell them to stop sharing and change the password if needed; never store it.

@@ -3,6 +3,12 @@
 Runs over StreamableHTTP at ``http://{host}:{port}/mcp``. Register it in Hermes
 ``config.yaml`` under ``mcp_servers`` and the agent can call ``rag_search`` /
 ``rag_stats`` like any built-in tool.
+
+Tiếng Việt: MCP server cung cấp cơ sở tri thức RAG cục bộ cho Hermes.
+
+Chạy qua StreamableHTTP tại ``http://{host}:{port}/mcp``. Đăng ký trong
+``config.yaml`` của Hermes dưới ``mcp_servers`` là agent có thể gọi
+``rag_search`` / ``rag_stats`` như mọi công cụ sẵn có.
 """
 
 from __future__ import annotations
@@ -19,6 +25,7 @@ logger = logging.getLogger("hermes_rag.mcp")
 
 
 def build_server(settings: Settings):
+    """Build the FastMCP server with tools bound to the store. / Tạo FastMCP server với các công cụ gắn vào store."""
     from mcp.server.fastmcp import FastMCP  # lazy: optional dep
 
     store = VectorStore(settings.db_path)
@@ -51,6 +58,15 @@ def build_server(settings: Settings):
         Args:
             query: Natural-language question or keywords.
             top_k: How many passages to return (1-20).
+
+        Tiếng Việt: Tìm trong cơ sở tri thức riêng của người dùng (tài liệu đã
+        nạp) và trả về các đoạn liên quan nhất kèm đường dẫn nguồn và điểm tương
+        đồng. Dùng khi câu hỏi có thể trả lời từ tài liệu, ghi chú hay cẩm nang
+        của chính người dùng thay vì kiến thức chung.
+
+        Tham số:
+            query: Câu hỏi ngôn ngữ tự nhiên hoặc từ khóa.
+            top_k: Số đoạn trả về (1-20).
         """
         top_k = max(1, min(int(top_k), 20))
         hits = retriever.search(query, top_k)
@@ -59,13 +75,18 @@ def build_server(settings: Settings):
     @mcp.tool()
     def rag_stats() -> str:
         """Report the knowledge base size: number of documents, chunks, and the
-        embedding model in use. Useful to check whether anything is ingested."""
+        embedding model in use. Useful to check whether anything is ingested.
+
+        Tiếng Việt: Báo cáo kích thước cơ sở tri thức: số tài liệu, số chunk và
+        model embedding đang dùng. Hữu ích để kiểm tra đã nạp dữ liệu hay chưa.
+        """
         return json.dumps(store.stats(), ensure_ascii=False, indent=2)
 
     return mcp
 
 
 def serve(settings: Settings | None = None) -> None:
+    """Run the MCP server over StreamableHTTP. / Chạy MCP server qua StreamableHTTP."""
     logging.basicConfig(level=logging.INFO)
     settings = settings or load_settings()
     logger.info(

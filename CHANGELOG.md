@@ -1,31 +1,15 @@
 # Changelog
 
-[English](README.md) | [Tiếng Việt](README.vi.md)
+**Tiếng Việt** | **English**
 
+Tất cả thay đổi đáng chú ý của dự án được ghi lại trong tệp này.
 All notable changes to this project are documented in this file.
-Mọi thay đổi đáng chú ý của dự án được ghi lại trong tệp này.
 
-## [0.1.0] - 2026-11-15
+---
 
-### English
+## 🇻🇳 Tiếng Việt
 
-First public release.
-
-- **Full FastAPI Management API** — 73 endpoints: health/info, auth, service
-  control, config/providers, channels, cron, logs + SSE streaming, env, CLI
-  passthrough, Zalo sidecar proxy, OpenViking, Codex OAuth, roles & rules.
-- **Optional RAG MCP service** — local fastembed embeddings + SQLite vector
-  store, exposing the `rag_search` / `rag_stats` tools to Hermes
-  (`install.sh --with-rag`).
-- **Bare-metal Ubuntu 24.04 deployment** — `install.sh` / `bootstrap.sh` set up
-  systemd `hermes.target` + Caddy reverse proxy + UFW firewall.
-- **CI/CD** — GitHub Actions + GitLab CI build and publish releases on `v*` tags.
-- **Bilingual VN–EN documentation** — `README.md` (English) and `README.vi.md`
-  (Tiếng Việt), cross-linked.
-- **Git history authorship** normalized to Nguyễn Thanh An with co-author
-  trailers.
-
-### Tiếng Việt
+### [0.1.0] - 2026-11-15
 
 Bản phát hành công khai đầu tiên.
 
@@ -40,6 +24,29 @@ Bản phát hành công khai đầu tiên.
   lập systemd `hermes.target` + reverse proxy Caddy + tường lửa UFW.
 - **CI/CD** — GitHub Actions + GitLab CI build và phát hành bản release khi có
   tag `v*`.
-- **Tài liệu song ngữ Việt–Anh** — `README.md` (English) và `README.vi.md`
-  (Tiếng Việt), liên kết chéo lẫn nhau.
+- **Tài liệu song ngữ Việt–Anh** — `README.md` chứa đầy đủ cả hai ngôn ngữ
+  (`## 🇻🇳 Tiếng Việt` / `## 🇬🇧 English`), theo chuẩn tổ chức `hitechcloudvn`.
 - **Chuẩn hoá tác giả lịch sử git** về Nguyễn Thanh An kèm trailer đồng tác giả.
+
+---
+
+## 🇬🇧 English
+
+### [0.1.0] - 2026-11-15
+
+First public release.
+
+- **Full FastAPI Management API** — 73 endpoints: health/info, auth, service
+  control, config/providers, channels, cron, logs + SSE streaming, env, CLI
+  passthrough, Zalo sidecar proxy, OpenViking, Codex OAuth, roles & rules.
+- **Optional RAG MCP service** — local fastembed embeddings + SQLite vector
+  store, exposing the `rag_search` / `rag_stats` tools to Hermes
+  (`install.sh --with-rag`).
+- **Bare-metal Ubuntu 24.04 deployment** — `install.sh` / `bootstrap.sh` set up
+  systemd `hermes.target` + Caddy reverse proxy + UFW firewall.
+- **CI/CD** — GitHub Actions + GitLab CI build and publish releases on `v*` tags.
+- **Bilingual VN–EN documentation** — `README.md` carries both languages in full
+  (`## 🇻🇳 Tiếng Việt` / `## 🇬🇧 English`), following the `hitechcloudvn` org
+  convention.
+- **Git history authorship** normalized to Nguyễn Thanh An with co-author
+  trailers.

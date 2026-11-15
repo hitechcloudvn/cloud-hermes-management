@@ -2,6 +2,11 @@
 
 Every value is overridable via an ``RAG_*`` env var so the systemd unit (and
 local dev) can tune model, paths, and ports without code changes.
+
+Tiếng Việt: Cấu hình thời gian chạy, đọc từ biến môi trường với giá trị mặc định hợp lý.
+
+Mọi giá trị đều có thể ghi đè qua biến môi trường ``RAG_*`` để systemd unit
+(và khi phát triển cục bộ) chỉnh model, đường dẫn, cổng mà không cần sửa code.
 """
 
 from __future__ import annotations
@@ -54,6 +59,10 @@ class Settings:
         """e5 family expects 'query:'/'passage:' prefixes; others do not.
 
         Override with RAG_EMBED_PREFIX=on|off when using a non-standard model.
+
+        Tiếng Việt: Họ e5 yêu cầu tiền tố 'query:'/'passage:'; các model khác thì không.
+
+        Ghi đè bằng RAG_EMBED_PREFIX=on|off khi dùng model không chuẩn.
         """
         override = os.environ.get("RAG_EMBED_PREFIX")
         if override is not None:
@@ -62,6 +71,7 @@ class Settings:
 
 
 def load_settings() -> Settings:
+    """Build Settings from RAG_* env vars. / Tạo Settings từ các biến môi trường RAG_*."""
     data_dir = Path(_env_str("RAG_DATA_DIR", "/opt/hermes-rag/data"))
     docs_dir = Path(_env_str("RAG_DOCS_DIR", "/opt/hermes-rag/docs"))
     model_cache_dir = Path(_env_str("RAG_MODEL_CACHE", "/opt/hermes-rag/models"))

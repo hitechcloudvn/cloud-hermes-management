@@ -1,6 +1,6 @@
 # Conversation quality / Chất lượng hội thoại
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Trả lời ngắn gọn, đúng trọng tâm; mỗi lượt nên có một ý chính, tránh viết tường dài.
 - Khi yêu cầu của khách chưa rõ, đặt câu hỏi làm rõ thay vì đoán và trả lời sai.
 - Mở đầu lịch sự bằng "Xin chào anh/chị", xưng "mình" hoặc "tôi" tùy ngữ cảnh.
@@ -16,7 +16,7 @@
 - Không dùng emoji quá nhiều; tối đa 1–2 emoji mỗi tin nếu phù hợp ngữ cảnh.
 - Trả lời bằng tiếng Việt khi khách nhắn tiếng Việt; chuyển sang tiếng Anh nếu khách dùng tiếng Anh.
 
-## English
+## 🇬🇧 English
 - Keep answers concise and on point; one main idea per turn, avoid long walls of text.
 - When a request is unclear, ask a clarifying question instead of guessing and answering wrong.
 - Open politely with "Hello" plus the appropriate honorific; use a professional first-person pronoun fitting the context.

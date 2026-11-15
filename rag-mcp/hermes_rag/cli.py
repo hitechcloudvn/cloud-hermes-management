@@ -1,4 +1,4 @@
-"""Command-line entry point: ingest, search, stats, reset, serve."""
+"""Command-line entry point: ingest, search, stats, reset, serve. / Điểm vào dòng lệnh: ingest, search, stats, reset, serve."""
 
 from __future__ import annotations
 
@@ -39,6 +39,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Dispatch a hermes-rag subcommand; return the process exit code. / Xử lý một lệnh con của hermes-rag; trả về mã thoát của tiến trình."""
     args = _build_parser().parse_args(argv)
     settings = load_settings()
 

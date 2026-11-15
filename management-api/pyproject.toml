@@ -9,6 +9,14 @@ description = "Hermes VPS Management API (FastAPI) / API quản trị VPS Hermes
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
+authors = [{ name = "Nguyễn Thanh An", email = "thanhan92f1@gmail.com" }]
+
+[project.urls]
+Homepage = "https://github.com/hitechcloudvn/cloud-hermes-management"
+Repository = "https://github.com/hitechcloudvn/cloud-hermes-management"
+Issues = "https://github.com/hitechcloudvn/cloud-hermes-management/issues"
+Changelog = "https://github.com/hitechcloudvn/cloud-hermes-management/blob/main/CHANGELOG.md"
+GitLab = "https://gitlab.com/hitechcloudvn/cloud-hermes-management"
 dependencies = [
     "fastapi>=0.110",
     "uvicorn>=0.27",

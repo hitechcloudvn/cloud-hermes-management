@@ -6,6 +6,15 @@ the pipeline can be exercised without downloading a model.
 
 All embedders return L2-normalized float32 vectors, so the store can treat the
 dot product as cosine similarity.
+
+Tiếng Việt: Các backend embedding.
+
+``FastEmbedEmbedder`` chạy model ONNX cục bộ trên CPU qua fastembed (không cần
+API key, chạy ngoại tuyến). ``HashEmbedder`` là bản thay thế tất định dùng cho
+bộ kiểm thử để chạy toàn bộ pipeline mà không cần tải model.
+
+Mọi embedder đều trả về vector float32 đã chuẩn hóa L2, nên store có thể coi
+tích vô hướng là độ tương đồng cosine.
 """
 
 from __future__ import annotations
@@ -33,7 +42,7 @@ class Embedder(Protocol):
 
 
 class FastEmbedEmbedder:
-    """Local fastembed model. Applies e5 prefixes when ``use_e5_prefix``."""
+    """Local fastembed model. Applies e5 prefixes when ``use_e5_prefix``. / Model fastembed cục bộ. Thêm tiền tố e5 khi ``use_e5_prefix``."""
 
     def __init__(
         self,
@@ -56,11 +65,13 @@ class FastEmbedEmbedder:
         return _normalize(np.asarray(vecs, dtype=np.float32))
 
     def embed_documents(self, texts: list[str]) -> np.ndarray:
+        """Embed documents, adding the 'passage:' prefix when e5. / Nhúng tài liệu, thêm tiền tố 'passage:' khi là e5."""
         if self.use_e5_prefix:
             texts = [f"passage: {t}" for t in texts]
         return self._embed(texts)
 
     def embed_query(self, text: str) -> np.ndarray:
+        """Embed one query, adding the 'query:' prefix when e5. / Nhúng một truy vấn, thêm tiền tố 'query:' khi là e5."""
         payload = f"query: {text}" if self.use_e5_prefix else text
         return self._embed([payload])[0]
 
@@ -71,6 +82,12 @@ class HashEmbedder:
     Hashes whitespace tokens into a fixed-width bag-of-words vector. Identical
     text yields identical vectors and lexical overlap raises cosine similarity,
     which is enough to validate chunking/storage/retrieval plumbing.
+
+    Tiếng Việt: Embedding tất định, không phụ thuộc thư viện ngoài, dành cho kiểm thử.
+
+    Băm các token (tách theo khoảng trắng) thành vector bag-of-words chiều cố
+    định. Văn bản giống nhau cho vector giống nhau, và độ trùng từ vựng làm tăng
+    độ tương đồng cosine — đủ để kiểm tra hạ tầng chia đoạn/lưu trữ/truy xuất.
     """
 
     def __init__(self, dim: int = 64) -> None:
@@ -88,9 +105,11 @@ class HashEmbedder:
         return vec
 
     def embed_documents(self, texts: list[str]) -> np.ndarray:
+        """Embed documents with the hash embedder. / Nhúng tài liệu bằng hash embedder."""
         return _normalize(np.vstack([self._embed_one(t) for t in texts]))
 
     def embed_query(self, text: str) -> np.ndarray:
+        """Embed one query with the hash embedder. / Nhúng một truy vấn bằng hash embedder."""
         return _normalize(self._embed_one(text))[0]
 
 

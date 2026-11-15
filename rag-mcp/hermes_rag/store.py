@@ -5,6 +5,14 @@ and metadata. Search loads the matrix into memory and does a single dot-product
 pass — no native extension (sqlite-vec/FAISS) required, which keeps deployment
 on a bare VPS dependency-free. Fine for corpora up to ~tens of thousands of
 chunks; swap in a real ANN index beyond that.
+
+Tiếng Việt: Vector store dựa trên SQLite với tìm kiếm cosine vét cạn.
+
+Embedding được lưu dạng BLOB float32 đã chuẩn hóa L2 cùng văn bản gốc và
+metadata. Tìm kiếm nạp ma trận vào bộ nhớ rồi nhân tích vô hướng một lần —
+không cần extension native (sqlite-vec/FAISS), giúp triển khai trên VPS thuần
+không thêm phụ thuộc. Đủ tốt tới vài chục nghìn chunk; lớn hơn thì nên chuyển
+sang ANN index thực thụ.
 """
 
 from __future__ import annotations
@@ -64,16 +72,19 @@ class VectorStore:
         self._cache_token: int | None = None
 
     def close(self) -> None:
+        """Close the SQLite connection. / Đóng kết nối SQLite."""
         self._conn.close()
 
     # ---- meta ----------------------------------------------------------
     def get_meta(self, key: str) -> str | None:
+        """Return a meta value by key, or None. / Trả về giá trị meta theo khóa, hoặc None."""
         row = self._conn.execute(
             "SELECT value FROM meta WHERE key = ?", (key,)
         ).fetchone()
         return row[0] if row else None
 
     def set_meta(self, key: str, value: str) -> None:
+        """Upsert a meta key/value pair. / Ghi (chèn hoặc cập nhật) cặp khóa/giá trị meta."""
         self._conn.execute(
             "INSERT INTO meta(key, value) VALUES(?, ?) "
             "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
@@ -86,6 +97,10 @@ class VectorStore:
 
         Mixing vectors from different models in one store yields garbage
         similarities, so we refuse rather than silently corrupt retrieval.
+
+        Tiếng Việt: Ghi lại model/chiều của embedding, hoặc báo lỗi nếu không
+        khớp. Trộn vector từ các model khác nhau trong cùng store sẽ cho ra độ
+        tương đồng sai, nên ta từ chối thay vì âm thầm làm hỏng truy xuất.
         """
         existing_model = self.get_meta("embed_model")
         if existing_model is None:
@@ -102,12 +117,14 @@ class VectorStore:
 
     # ---- writes --------------------------------------------------------
     def get_doc_hash(self, path: str) -> str | None:
+        """Return the stored content hash for ``path``, or None. / Trả về content hash đã lưu của ``path``, hoặc None."""
         row = self._conn.execute(
             "SELECT hash FROM docs WHERE path = ?", (path,)
         ).fetchone()
         return row[0] if row else None
 
     def delete_document(self, path: str) -> None:
+        """Delete a document and all of its chunks. / Xóa một tài liệu và toàn bộ chunk của nó."""
         self._conn.execute("DELETE FROM chunks WHERE path = ?", (path,))
         self._conn.execute("DELETE FROM docs WHERE path = ?", (path,))
         self._conn.commit()
@@ -116,7 +133,7 @@ class VectorStore:
     def add_document(
         self, path: str, doc_hash: str, texts: list[str], embeddings: np.ndarray
     ) -> int:
-        """Replace any existing rows for ``path`` with the given chunks."""
+        """Replace any existing rows for ``path`` with the given chunks. / Thay các dòng cũ của ``path`` bằng những đoạn đã cho."""
         if len(texts) != len(embeddings):
             raise ValueError("texts and embeddings length mismatch")
         self.delete_document(path)
@@ -140,6 +157,7 @@ class VectorStore:
         return len(texts)
 
     def reset(self) -> None:
+        """Wipe every document, chunk, and meta entry. / Xóa toàn bộ tài liệu, chunk và mục meta."""
         self._conn.execute("DELETE FROM chunks")
         self._conn.execute("DELETE FROM docs")
         self._conn.execute("DELETE FROM meta")
@@ -148,6 +166,7 @@ class VectorStore:
 
     # ---- reads ---------------------------------------------------------
     def stats(self) -> dict:
+        """Return counts + model metadata for the store. / Trả về số lượng và metadata model của store."""
         n_docs = self._conn.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
         n_chunks = self._conn.execute("SELECT COUNT(*) FROM chunks").fetchone()[0]
         return {
@@ -174,6 +193,7 @@ class VectorStore:
         return self._cache
 
     def search(self, query_vec: np.ndarray, top_k: int = 5) -> list[SearchHit]:
+        """Return the top-k chunks nearest to ``query_vec`` by cosine similarity. / Trả về top-k chunk gần ``query_vec`` nhất theo độ tương đồng cosine."""
         matrix, ids = self._load_matrix()
         if matrix.shape[0] == 0:
             return []

@@ -1,6 +1,6 @@
 # Marketing & sales / Marketing & bán hàng
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Mọi tuyên bố về sản phẩm/dịch vụ phải đúng sự thật và có thể kiểm chứng được.
 - Không tạo cảm giác khan hiếm giả ("chỉ còn 1 suất", "ưu đãi sắp hết") nếu không đúng thực tế.
 - Giá niêm yết phải rõ ràng: nêu rõ đã bao gồm VAT hay chưa và mọi phụ phí liên quan.
@@ -16,7 +16,7 @@
 - Không thổi phồng số liệu (số khách hàng, năm kinh nghiệm, hiệu quả sản phẩm).
 - Nội dung bán hàng dài cần kèm thông tin liên hệ và cách thức khiếu nại.
 
-## English
+## 🇬🇧 English
 - Every claim about products/services must be truthful and verifiable.
 - Never fabricate scarcity ("only 1 slot left", "offer ending soon") unless it is real.
 - Pricing must be clear: state whether VAT is included and list any surcharges.

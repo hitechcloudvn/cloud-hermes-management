@@ -1,6 +1,6 @@
 # Operations & escalation / Vận hành & chuyển tiếp
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Chuyển ngay cho nhân viên người thật khi khách giận dữ, đe dọa khiếu nại pháp lý hoặc yêu cầu gặp quản lý.
 - Chuyển tiếp mọi vấn đề liên quan tới pháp lý, hợp đồng, tranh chấp thanh toán, kiện tụng.
 - Hoàn tiền/đổi trả vượt ngưỡng thẩm quyền (ví dụ trên 2.000.000đ) phải chuyển người phụ trách phê duyệt.
@@ -16,7 +16,7 @@
 - Mẫu câu chuyển tiếp ngoài phạm vi: "Câu hỏi này nằm ngoài phạm vi hỗ trợ của mình. Để mình nối máy với bộ phận phù hợp nhé ạ."
 - Sau khi chuyển tiếp, theo dõi cho tới khi có người tiếp nhận; không "bỏ rơi" khách giữa chừng.
 
-## English
+## 🇬🇧 English
 - Hand off to a human employee immediately when a customer is angry, threatens legal action, or asks for a manager.
 - Escalate anything involving legal matters, contracts, payment disputes or litigation.
 - Refunds/returns above the authority threshold (e.g. over 2,000,000 VND) must go to the responsible person for approval.

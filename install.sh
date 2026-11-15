@@ -2,6 +2,12 @@
 # =============================================================================
 # Hermes Agent VPS — Bare-metal one-shot installer (Ubuntu 24.04)
 #
+# Mục đích (VI): Cài đặt một lần Hermes Agent + dashboard + Management API +
+#   reverse proxy Caddy trên VPS bare-metal Ubuntu 24.04, tự sinh token và SSL.
+# Purpose (EN): One-shot install of Hermes Agent + dashboard + Management API +
+#   Caddy reverse proxy on a bare-metal Ubuntu 24.04 VPS, auto-generating
+#   tokens and SSL.
+#
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | \
 #     bash -s -- [--mgmt-key <KEY>] [--domain <FQDN>]
@@ -16,7 +22,7 @@
 #   --with-rag   Install the local RAG MCP service + register it with Hermes
 #   --skip-zalo  Skip the Zalo personal plugin (installed by default)
 #
-# Full docs: README.md (English) / README.vi.md (Tiếng Việt)
+# Tài liệu đầy đủ / Full docs: README.md (song ngữ VN/EN / bilingual VN/EN)
 # =============================================================================
 
 set -euo pipefail

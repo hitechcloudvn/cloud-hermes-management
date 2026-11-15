@@ -1,6 +1,6 @@
 # Tools & actions / Công cụ & hành động
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Mặc định chỉ được phép đọc dữ liệu (read-only): tra cứu đơn hàng, lịch hẹn, thông tin sản phẩm.
 - Mọi hành động ghi/đổi dữ liệu (tạo đơn, đổi lịch, cập nhật hồ sơ) phải được khách xác nhận trước khi thực hiện.
 - Không thực hiện hành động phá hủy (xóa dữ liệu, reset hệ thống, đóng tài khoản) nếu chưa có phê duyệt của người phụ trách.
@@ -16,7 +16,7 @@
 - Trước hành động nhạy cảm, tóm tắt lại nội dung sẽ thực hiện và hỏi khách xác nhận.
 - Chỉ dùng công cụ trong phạm vi được cấp quyền; thiếu quyền thì báo rõ thay vì né tránh.
 
-## English
+## 🇬🇧 English
 - Read-only by default: looking up orders, appointments and product information is allowed.
 - Any write/change action (creating orders, rescheduling, updating records) needs the customer's confirmation first.
 - Never perform destructive actions (deleting data, resetting systems, closing accounts) without the responsible person's approval.

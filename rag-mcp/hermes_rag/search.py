@@ -1,4 +1,4 @@
-"""Query-time retrieval and result formatting shared by CLI and MCP server."""
+"""Query-time retrieval and result formatting shared by CLI and MCP server. / Truy xuất lúc truy vấn và định dạng kết quả, dùng chung cho CLI và MCP server."""
 
 from __future__ import annotations
 
@@ -16,12 +16,13 @@ class Retriever:
         self.embedder = embedder
 
     def search(self, query: str, top_k: int | None = None) -> list[SearchHit]:
+        """Embed the query and return the top-k hits. / Nhúng truy vấn và trả về top-k kết quả liên quan nhất."""
         k = top_k or self.settings.top_k
         query_vec = self.embedder.embed_query(query)
         return self.store.search(query_vec, top_k=k)
 
     def format_context(self, hits: list[SearchHit], max_chars: int | None = None) -> str:
-        """Render hits as a citation-prefixed context block for the LLM."""
+        """Render hits as a citation-prefixed context block for the LLM. / Hiển thị kết quả thành khối ngữ cảnh có tiền tố trích dẫn cho LLM."""
         if not hits:
             return "No relevant documents found."
         budget = max_chars or self.settings.max_context_chars

@@ -27,3 +27,6 @@ build/
 # local notes
 /tmp/
 /scratch/
+
+# local agent/editor state
+.claude/

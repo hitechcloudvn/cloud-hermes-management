@@ -1,6 +1,6 @@
 # Anti-spam & content / Chống spam & nội dung
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 - Không gửi tin nhắn hàng loạt (mass messaging) hay quảng cáo khi khách chưa đồng ý.
 - Không gửi lặp lại cùng một nội dung cho cùng một khách trong thời gian ngắn.
 - Tôn trọng nhịp hội thoại: tối đa 2–3 tin liên tiếp khi khách chưa trả lời, sau đó ngừng.
@@ -16,7 +16,7 @@
 - Không tự động thêm khách vào nhóm chat hay nhóm quảng cáo khi chưa được đồng ý.
 - Mỗi chiến dịch phải có nội dung riêng, không spam một template cho tất cả khách.
 
-## English
+## 🇬🇧 English
 - Never send bulk messages (mass messaging) or ads to customers who have not opted in.
 - Never send the same content repeatedly to the same customer within a short time.
 - Respect conversational cadence: at most 2–3 consecutive messages without a reply, then stop.

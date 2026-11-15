@@ -3,6 +3,12 @@
 Walks a file or directory, reads supported documents, chunks them, embeds the
 chunks, and upserts into the store. Ingestion is idempotent: a file whose
 content hash is unchanged since last run is skipped.
+
+Tiếng Việt: Nạp tài liệu + pipeline ingestion.
+
+Duyệt một tệp hoặc thư mục, đọc các tài liệu được hỗ trợ, chia đoạn, nhúng rồi
+ghi upsert vào store. Ingestion idempotent: tệp có content hash không đổi kể
+từ lần chạy trước sẽ bị bỏ qua.
 """
 
 from __future__ import annotations
@@ -28,6 +34,7 @@ def _read_pdf(path: Path) -> str:
 
 
 def load_text(path: Path) -> str:
+    """Read a text or PDF file as plain text. / Đọc tệp text hoặc PDF thành văn bản thuần."""
     suffix = path.suffix.lower()
     if suffix in PDF_EXTS:
         return _read_pdf(path)
@@ -35,6 +42,7 @@ def load_text(path: Path) -> str:
 
 
 def iter_files(root: Path) -> list[Path]:
+    """List supported files under ``root`` (or the single file itself). / Liệt kê các tệp được hỗ trợ trong ``root`` (hoặc chính tệp đơn lẻ)."""
     if root.is_file():
         return [root] if root.suffix.lower() in SUPPORTED_EXTS else []
     return sorted(
@@ -56,7 +64,7 @@ def ingest_path(
     settings: Settings,
     target: Path,
 ) -> dict:
-    """Ingest a file or directory. Returns a summary of what changed."""
+    """Ingest a file or directory. Returns a summary of what changed. / Nạp một tệp hoặc thư mục. Trả về tóm tắt những gì đã thay đổi."""
     store.ensure_model(embedder.model_name, embedder.dim)
 
     files = iter_files(target)

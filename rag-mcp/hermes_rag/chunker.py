@@ -4,6 +4,12 @@ Splits on the largest natural boundary that keeps pieces under ``chunk_size``
 (markdown headings → paragraphs → lines → sentences → words), then stitches a
 fixed-character overlap between adjacent chunks so retrieval doesn't lose
 context that straddles a cut.
+
+Tiếng Việt: Chia đẹ theo cấu trúc tài liệu, đệ quy, có phần chồng lấn.
+
+Cắt tại ranh giới tự nhiên lớn nhất để mỗi đoạn vẫn dưới ``chunk_size`` (tiêu
+đề markdown → đoạn văn → dòng → câu → từ), sau đó ghép phần chồng lấn cố định
+giữa các đoạn liền kề để truy xuất không mất ngữ cảnh vắt qua chỗ cắt.
 """
 
 from __future__ import annotations
@@ -66,7 +72,7 @@ def _merge_with_overlap(
 
 
 def chunk_text(text: str, chunk_size: int = 1000, overlap: int = 150) -> list[str]:
-    """Return a list of overlapping chunks. Empty/whitespace input → []."""
+    """Return a list of overlapping chunks. Empty/whitespace input → []. / Trả về danh sách các đoạn có chồng lấn. Đầu vào rỗng/chỉ khoảng trắng → []."""
     text = text.strip()
     if not text:
         return []

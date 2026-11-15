@@ -1,7 +1,7 @@
 # Release — cloud-hermes-management
-# Push tag v* de CI tu test, build wheels/sdists, checksum va publish GitHub Release
-# Pushing a v* tag makes CI run tests, build wheels/sdists, checksum them and publish the GitHub Release
-# (khong build artifact o may ca nhan / never build release artifacts locally)
+# Push tag v* để CI tự test, build source zip + wheels/sdists, checksum và publish GitHub Release
+# Pushing a v* tag makes CI run tests, build the source zip + wheels/sdists, checksum them and publish the GitHub Release
+# (không build artifact ở máy cá nhân / never build release artifacts locally)
 
 name: Release
 
@@ -14,14 +14,14 @@ permissions:
   contents: write
 
 jobs:
-  # Cong cho release: test phai xanh truoc / release gate — tests must pass first
+  # Cổng cho release: test phải xanh trước / release gate — tests must pass first
   test:
     name: test (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
 
@@ -33,17 +33,30 @@ jobs:
             management-api/pyproject.toml
             rag-mcp/pyproject.toml
 
-      # Dep cho ca hai bo test / deps for both suites (rag-mcp: fastembed/mcp la lazy import, khong can)
-      - name: Install test dependencies
+      # Dep cho rag-mcp (numpy/pypdf); fastembed/mcp là lazy import, không cần
+      # rag-mcp deps (numpy/pypdf); fastembed/mcp are lazy imports, not needed
+      - name: Install rag-mcp test dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi uvicorn pydantic pydantic-settings bcrypt psutil pyyaml httpx pytest numpy pypdf
+          pip install pytest numpy pypdf
           pip install -e rag-mcp --no-deps
+
+      # rag-mcp pytest trên mọi phiên bản Python / rag-mcp pytest on every Python version
+      - name: Run pytest (rag-mcp)
+        working-directory: rag-mcp
+        run: python -m pytest -q
+
+      # management-api yêu cầu Python >= 3.11 / management-api requires Python >= 3.11
+      - name: Install management-api test dependencies
+        if: matrix.python-version != '3.10'
+        run: |
+          pip install fastapi uvicorn pydantic pydantic-settings bcrypt psutil pyyaml httpx
           pip install -e management-api
 
-      # Ca hai bo pytest phai xanh / both pytest suites must pass
-      - name: Run pytest (management-api + rag-mcp)
-        run: python -m pytest management-api/tests rag-mcp/tests -q
+      # management-api pytest phải xanh / management-api pytest must pass
+      - name: Run pytest (management-api)
+        if: matrix.python-version != '3.10'
+        run: python -m pytest management-api/tests -q
 
   build-release:
     name: build artifacts + GitHub Release
@@ -56,31 +69,40 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Build wheel + sdist cho ca hai goi / build wheels + sdists for both packages
+      # Source zip của đúng commit trên tag / source zip of the exact tagged commit
+      - name: Build source zip (git archive)
+        run: |
+          mkdir -p dist
+          git archive --format=zip \
+            --prefix=cloud-hermes-management-${GITHUB_REF_NAME}/ \
+            -o dist/cloud-hermes-management-${GITHUB_REF_NAME}.zip HEAD
+          ls -l dist
+
+      # Build wheel + sdist cho cả hai gói / build wheels + sdists for both packages
       - name: Build wheels and sdists
         run: |
           pip install build
           python -m build management-api
           python -m build rag-mcp
           mkdir -p artifacts
-          cp management-api/dist/* rag-mcp/dist/* artifacts/
-          (cd artifacts && sha256sum *.whl *.tar.gz > SHA256SUMS.txt)
+          cp dist/*.zip management-api/dist/* rag-mcp/dist/* artifacts/
+          (cd artifacts && sha256sum *.whl *.tar.gz *.zip > SHA256SUMS.txt)
           ls -l artifacts
 
-      # Luu artifact tren workflow de truy vet / upload workflow artifacts for traceability
+      # Lưu artifact trên workflow để truy vết / upload workflow artifacts for traceability
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: release-artifacts
           path: artifacts/
 
-      # Tao GitHub Release tren tag da push / create the GitHub Release on the pushed tag
+      # Tạo GitHub Release trên tag đã push / create the GitHub Release on the pushed tag
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: artifacts/*
-          generate_release_notes: false
+          generate_release_notes: true
           fail_on_unmatched_files: true
           body: |
             ## Tiếng Việt
@@ -90,7 +112,7 @@ jobs:
             - **Management API** (FastAPI) với 73 endpoint quản trị
             - **RAG MCP** — dịch vụ truy xuất tri thức cục bộ
             - **Trình cài đặt bare-metal** (`install.sh` / `bootstrap.sh`)
-            - Wheel/sdist do CI xây dựng, kèm checksum `SHA256SUMS.txt`
+            - Source zip (`git archive`) + wheel/sdist do CI xây dựng, kèm checksum `SHA256SUMS.txt`
 
             Cài đặt bằng lệnh sau từ tổ chức `hitechcloudvn`:
 
@@ -105,7 +127,7 @@ jobs:
             - **Management API** (FastAPI) with 73 endpoints
             - **RAG MCP** — local knowledge retrieval service
             - **Bare-metal installer** (`install.sh` / `bootstrap.sh`)
-            - CI/CD-built wheels/sdists with `SHA256SUMS.txt` checksums
+            - Source zip (`git archive`) + CI/CD-built wheels/sdists with `SHA256SUMS.txt` checksums
 
             Install with the following command from the `hitechcloudvn` org:
 
