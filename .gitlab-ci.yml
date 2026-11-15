@@ -60,73 +60,29 @@ build:
       dotenv: build.env
 
 # Tao GitLab Release khi co tag v* / create the GitLab Release on v* tags
+# Khong dung keyword `release:` — runner 19.6+ yeu cau glab/release-cli trong
+# image job (python:3.11-slim khong co) va embed mo ta markdown vao shell script
+# (backtick trong mo ta bi thuc thi). Goi Releases API truc tiep qua
+# .ci/create_gitlab_release.py — xem docstring file do.
+# Not using the `release:` keyword — runner 19.6+ needs glab/release-cli inside
+# the job image (python:3.11-slim has neither) and embeds the markdown notes
+# into shell code (backticks get executed). We call the Releases API directly
+# via .ci/create_gitlab_release.py — see that file's docstring.
 release:
   stage: release
   needs:
     - build
   rules:
     - if: $CI_COMMIT_TAG =~ /^v/
-  # script la BAT BUOC do cach GitLab phan loai job: Entry::Job chi match khi co script:/run:,
-  # con job co needs: (ma khong co script) se bi tinh la trigger job (Entry::Bridge) va bi tu choi
-  # cac key artifacts:/release: — lam MOI pipeline that bai ngay khi tao (zero jobs).
-  # script is REQUIRED by GitLab's job dispatch: Entry::Job matches only with script:/run: present;
-  # a job with needs: but no script is typed as a trigger job (Entry::Bridge) and its
-  # artifacts:/release: keys are rejected, failing every pipeline at creation (zero jobs).
   script:
-    - echo "Publishing GitLab release ${CI_COMMIT_TAG}" && ls -l dist/
-  # Upload lai dist/ de link job-artifact $CI_JOB_ID hoat dong / re-upload dist/ so $CI_JOB_ID artifact links resolve
+    - ls -l dist/
+    - python -u .ci/create_gitlab_release.py
+  # Upload lai dist/ de link job-artifact $CI_JOB_ID hoat dong; giu ca khi that
+  # bai de doc release-response.json / re-upload dist/ so $CI_JOB_ID artifact
+  # links resolve; keep even on failure so release-response.json stays readable
   artifacts:
+    when: always
     paths:
       - dist/
+      - release-response.json
     expire_in: 30 days
-  release:
-    tag_name: $CI_COMMIT_TAG
-    name: "$CI_COMMIT_TAG"
-    description: |
-      ## Tiếng Việt
-
-      Bản phát hành đầu tiên của **cloud-hermes-management** — bộ công cụ triển khai Hermes Agent lên VPS bare-metal (Ubuntu 24.04):
-
-      - **Management API** (FastAPI) với 73 endpoint quản trị
-      - **RAG MCP** — dịch vụ truy xuất tri thức cục bộ
-      - **Trình cài đặt bare-metal** (`install.sh` / `bootstrap.sh`)
-      - Wheel/sdist do CI xây dựng, kèm checksum `SHA256SUMS.txt`
-
-      Cài đặt bằng lệnh sau từ tổ chức `hitechcloudvn`:
-
-      ```bash
-      curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | bash
-      ```
-
-      ## English
-
-      First release of **cloud-hermes-management** — bare-metal deployment wrapper for Hermes Agent (Ubuntu 24.04 VPS):
-
-      - **Management API** (FastAPI) with 73 endpoints
-      - **RAG MCP** — local knowledge retrieval service
-      - **Bare-metal installer** (`install.sh` / `bootstrap.sh`)
-      - CI/CD-built wheels/sdists with `SHA256SUMS.txt` checksums
-
-      Install with the following command from the `hitechcloudvn` org:
-
-      ```bash
-      curl -fsSL https://raw.githubusercontent.com/hitechcloudvn/cloud-hermes-management/main/install.sh | bash
-      ```
-    assets:
-      links:
-        # Ten file lay tu dotenv cua job build / filenames discovered by the build job
-        - name: "hermes_mgmt wheel"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_MGMT_WHL}"
-          link_type: package
-        - name: "hermes_mgmt sdist"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_MGMT_SDIST}"
-          link_type: package
-        - name: "hermes_rag wheel"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_RAG_WHL}"
-          link_type: package
-        - name: "hermes_rag sdist"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/${ASSET_RAG_SDIST}"
-          link_type: package
-        - name: "SHA256SUMS.txt"
-          url: "$CI_PROJECT_URL/-/jobs/${CI_JOB_ID}/artifacts/file/dist/SHA256SUMS.txt"
-          link_type: other
